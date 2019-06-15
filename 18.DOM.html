@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+    document.getElementById('ID')  通过ID获取指定元素对象。document称之为上下文（context）
+        注意点： 只能的上下文只能是document，也就是说只有document.getElementById() :页面中ID是唯一的。
+                    扩展:在IE67中。会把表单元素input的name属性当做ID来使用。垃圾还用什么IE
+
+    [context].getElementsByTagName('div')  在指定上下文中通过标签获取一组元素集合：伪数组：不能直接使用数组中得方法
+                    会获得文档中的所有标签为div的。包括所有后代
+                    注意点、。获取到的是一个集合。要操作具体的某项就是[context].getElementsByTagName('div')[索引]
+                            在上下文 context。这里不仅可以是document，还可以是你已经获得元素里的。那么这个时候这个元素就是上下文
+
+    [context].getElementsByClassName('calss名称')  在指定上下文中通过calss名称来获取一组元素集合
+                        特点：会获取到所有包含这个class名称的。样式名称是可以写入多个的。  IE9以下不支持
+
+    document.getElementsByName('name属性名称')   在指定上下文中通过name这个属性值来获取一组元素集合 通常是给表单
+                        特点： 上下文只有document，通常是给表单元素设置name 。
+                        IE（9及以下）中该方法只对表单起作用
+                                
+
+    [context].querySelector('')  在指定上下文中通过css选择器来获取到到一个元素，不管获取到几个都只会获取一个
+                      不兼容IE678.无解决办法 一般是用于移动端   相对于其他。性能偏低
+
+    [context].querySelectorAll('') 在指定上下文中通过css选择器来获取到所有元素，结果是一个节点集合（NodeList）类数组
+                       不兼容IE678.无解决办法 一般是用于移动端   相对于其他。性能偏低
+                        通过属性来获得querySelectorAll('[name="aabb"]')
+                        通过上下级来获得querySelectorAll('.box>div')
+
+    document.head   获取head元素对象
+    document.body   获取body元素对象
+    document.documentElement   获取html元素对象
+        扩展：js会把元素的id作为变量来使用。比如你console.log(id)。就会打印有这个id的元素。
+    -->
+    <!-- 需求： 获取所有ID为HAHHA的元素（要兼容所有浏览器） -->
+    <div id="haha"></div>
+    <p id="haha"></p>
+    <!-- 除了用querySelectorAll -->
+    <!-- 思路。获取所有标签。依次遍历。找到ID这个属性 -->
+    <script>
+        function queryAllId(id) { 
+            let nodeList =document.getElementsByTagName('*');//获取所有标签
+            let all =[];
+            for(let i =0;i<nodeList.length;i++){
+                let  item = nodeList[i];
+                if(item.id===id){
+                    all.push(item)     
+                };
+            }
+            return all;
+         };
+
+         console.log(queryAllId('haha'));
+
+    </script>
+</body>
+ 
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #codeBox{
+            display: inline-block;
+            width: 80px;
+            height: 35px;
+            line-height: 35px;
+            border: 1px solid #aaaaaa;
+            text-align: center;
+            font-size: 18px;
+            letter-spacing: 5px;   
+            /* 每个字符间的间距 */
+        }
+        #link{
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="codeBox">
+    </div>
+    <a href="javascript:;" id="link">看不清楚,换一张</a><br>
+    <input type="text" id="input">
+    <button id="btn">输入</button>
+</body>
+<script>
+    let codeBox = document.getElementById('codeBox');
+    let link = document.getElementById('link');
+    let input = document.getElementById('input');
+    let btn = document.getElementById('btn');
+    let check = function(){
+        input.value =input.value.toLowerCase(); //把生成的转为小写
+        // codeBox.innerHTML= codeBox.innerHTML.toLowerCase();//把用户输入的也转换成小写和上面一样的
+        // 上面不严谨。如果用户不输入。点击也会转换，放在判断里
+        if(input.value== codeBox.innerHTML.toLowerCase()){
+            console.log('正确')
+        }else{
+            console.log('错了会重新刷新');
+            codeBox.innerHTML =  queryCode()
+        };
+    };
+    btn.onclick=check;
+    document.onkeydown=function(e){
+        if(e.keyCode===13){
+            console.log('a');
+            check()
+        }
+    }
+     /* //自己写的。思路差不多。
+    function queryCode(){
+        // 1:准备验证码范围
+        let codeArea ='qwertyuiopasdfghjklzxcvbnm0123456789QWERTYUIOPASDFGHJKLZXCVBNM';
+        console.log(codeArea.length);
+        let a = Math.round(Math.random()*61);
+        let b = Math.round(Math.random()*61);
+        let c = Math.round(Math.random()*61);
+        let d = Math.round(Math.random()*61);
+        let code = codeArea[a]+codeArea[c]+codeArea[d]+codeArea[b];
+       return code;
+    };
+  codeBox.innerHTML = queryCode();
+  link.onclick=function () { 
+    codeBox.innerHTML = queryCode();
+   } */
+   function queryCode(){
+        // 1:准备验证码范围
+        let codeArea ='qwertyuiopasdfghjklzxcvbnm0123456789QWERTYUIOPASDFGHJKLZXCVBNM';
+        // length是62 所以范围是0-61之间
+       let result = '';
+       for(let i=0;i<4;i++){
+           let n =Math.round(Math.random()*61);
+            let char  =codeArea.charAt(n);
+            // 生成四次不重复的   最后结果在拼接结果中。如果有一个字符的indexOf(char)的值大于（只要有就返回0以上）-1 
+            // 那么就证明他没有出现过
+            if(result.indexOf(char)>-1){
+                i--;
+               continue;
+            }
+            result += char;
+       }
+       /*
+        // 用while要好理解点
+           while(result.length<4){
+               let n =Math.round(Math.random()*61);
+                let char  =codeArea.charAt(n);
+                if(result.indexOf === -1){
+                    reslut += char
+                }
+           } 
+        */
+       console.log(result)
+       return result //记得是在函数里去返回 不是在for循环。for循环是四个验证码（字符）拼接后的结果
+    };
+    // 开始加载生成
+    codeBox.innerHTML = queryCode();
+    link.onclick=function(){
+        codeBox.innerHTML =  queryCode()
+    }
+    
+</script>
+</html>

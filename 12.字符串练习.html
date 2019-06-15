@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        需求：1：时间字符串格式化  ：2019-6-8 14:49:8  获取到06月08日 16时26分
+              2：url地址问号传参解析：获取到？后的参数然后返回一个对象
+     -->
+</body>
+<script>
+        function addZero(str) {
+            // return str<10?str='0'+str:null
+             return str<10?'0'+str:str
+          }
+    let str = "2019-6-8 14:49:8" ;
+    let arr =str.split(" ");
+    let arrLeft =arr[0].split('-')
+    let arrRight =arr[1].split(':')
+    let month =addZero(arrLeft[1]);
+    let day =addZero(arrLeft[2]);
+    let hour =addZero(arrRight[0]);
+    let minute =addZero(arrRight[1]);
+    let result =month +"月" +day+"日 "+hour+"时"+minute+"分"
+       
+    console.log(arrLeft)
+    console.log(arrRight)
+    console.log(result)
+
+    let str1  = "http://www.baidu.com/stu/?lx=1&name=AA&sex=man#te";
+    strIndex =str1.indexOf('?');
+    str1Index=str1.indexOf('#');
+    // console.log(strIndex)
+    // console.log(str1Index)
+    if(str1Index === -1){
+        str1 = str1.substr(strIndex+1);
+        // 不存在# 截取到末尾
+    }else{
+        str1 =str1.slice(strIndex+1,str1Index)
+        //  存在#  截取到#
+    }
+    console.log(str1);
+    let arr1 = str1.split("&");
+    console.log('arr1是：'+arr1);
+    let obj ={};
+    for(let i =0 ;i<arr1.length;i++){
+        let arr2 = arr1[i].split('=');
+            console.log(arr2);
+        let key = arr2[0];//对象的属性名
+        let value =arr2[1];//对象的属性值
+        obj[key]=value;//给对象添加好属性名和属性值
+    }
+console.log(obj);//有一个缺点。当没有=后的值怎么办？
+   
+</script>
+</html>

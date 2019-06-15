@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    function 函数名也是变量，存储的值就是函数的类型而已 <br>
+    let                                                 <br>
+    const   常量                                    <br>
+    import  模块规范导出的信息                      <br>
+    class   创建的类                                <br>
+    <hr>
+    数据类型：
+    - 基本数据类型：
+        Number：特殊的 NaN
+        String
+        Boolean
+        Null
+        undefined
+    - 引用数据类型：
+        Object  
+            普通对象
+            数组对象
+            正则对象
+            日期对象
+        function
+    - ES6新增：symbol ：唯一值 
+
+    扩展：alert(true) :输出的都是字符串true。 先计算。然后用toString()转换为字符串在输出
+</body>
+<script>
+        const a = Symbol('zfpx');//唯一的。且不可更改
+        const b = Symbol('zfpx');
+        console.log(a);//Symbol(zfpx)
+        console.log(b);//Symbol(zfpx)
+        console.log(a == b);//false
+</script>
+</html>
+<!-- 
+    NaN不和任何值相等。要判断是不是NaN 需要isNaN()
+    isNaN() ：检查值是不是NaN:
+    运行机制：
+        1：验证当前要检测的值是否为数字类型、如果不是，默认会吧值转换为数字类型
+                转换数字：
+                    - : 其他基本类型转换为数字： 直接转换Number()方法转换
+                                                String转：如果是纯数字、直接就是转换成数字。
+                                                        如果出现任意一个非有效数字，比如：13px。返回NaN
+                                                        出现小数点：一个能正常识别 多了就不行 比如 13.5->13.5 13.5.5->NaN
+                                                Boolean转：true -> 1;
+                                                            false -> 0;
+                                                Null转：-> 0 
+                                                undefined -> NaN
+                    -:引用类型：先使用toString()方法转换成为字符串。在把字符串转为Number
+                                对象：    ({}).toString() -> '[Object Object]' -> NaN
+                                数组      ([12,34]).toString() -> '12,34' ->NaN
+                                          ([12]).toString() -> '12' ->是Number
+                                正则和函数转换为数字都返回NaN
+        2：当前检查的值已经是数字类型、是有效数字返回false，不是返回true
+ -->
+ <!-- 
+
+     字符串转数字 实用的还有 parseInt()     转换为整数  
+                            parseInt('13.5px')  ->  13  
+                                这里注意、。第一位如果不是数字。直接变成NaN
+                        parseFloat()  :转换为小数
+                               parseInt('13.5px')  ->  13.5
+                               这里注意只识别一个小数点 
+  -->
+  <!-- 
+      Boolean 转换
+        Boolean()
+        !   :   取反   转换为和原来相反的boolean
+        !!      取反后在取反 就是转接转为boolean
+
+        除了 0  '' null NaN undefined  这些是false 
+                除了的都是true
+        
+    -->
+    <!-- 
+        null和undefined   都表示为空
+          null  后期可以自己修改  手动控制的
+          undefined   后期也能修改。 浏览器自主为控，后面也可以赋值。也可以不赋值
+
+          还有一个不同 转数字: null->0 undefined-> NaN
+     -->
+     <script>
+         let aa  = null;
+         aa=1
+        console.log(aa);
+        let bb ;//此时是undefined 后面可以赋值 也可以不赋值
+      //  bb=2;
+        console.log(bb)
+     </script>

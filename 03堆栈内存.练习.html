@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 考点： 先开辟空间来存储键值对、然后将这个空间的内存地址在赋值给变量
+        let obj = {
+            n:10,
+            m:obj.n*10
+        }
+            console.log(obj.m) // =>  报错 TypeError
+        /* 
+                解析 1： 开辟一个堆内存来存放键值对  
+                            n:10
+                            m：obj.n   进行到这一步时。
+                            obj这个变量还没有接收这个堆内存空间的地址。
+                            因此 obj是undefined。obj.n就是undefined.n
+                            基本数据类型是没有n这个属性的。因此会报错
+         */ 
+
+    </script>
+    <script>
+        // 注意点：1 单独赋值后就开辟了一个新的内存地址、2 索引从0开始
+        let arr = [3,4];
+        let arr1 = arr; //指向同一个内存地址 一个改变另一个也改变
+        arr1[0]=1;
+        // 此时 arr和arr1都是[1,4]
+        arr1=[4,5];
+        // 单独又开辟了堆内存地址来存储 arr1 = [4,5]
+        arr1[1]=2;
+         //arr索引为1的值是2  因此 arr1=[4,2]
+        arr[1]=0;
+        // arr 还是之前的内存地址里的 因此arr=[1,4]  索引为1得值是4，改变这个值为0  因此arr=[1,0]
+        console.log(arr)//1,0
+        console.log(arr1)//4,2
+    </script>
+</body>
+</html>

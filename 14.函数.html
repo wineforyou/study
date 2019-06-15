@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        实参一定是值！！即使我们写的是变量或者表达式。也是把变量或者表达式计算的结果作为值传递给形参变量
+            函数：创建一个堆内存。将函数的函数体作为字符串存储，并将堆内存地址赋值给函数名
+                    注意：函数每执行一次都会产生一个新的私有作用域（栈），
+                            目的是： 1：把原有堆内存中存储的字符串变为JS表达式执行
+                                    2：保护里面的私有变量不受外界的干扰（和外界是隔离的）。即变量私有。和外面的不冲突
+                        把这种函数执行的这种保护机制。称为  闭包 ！！
+                入口是形参。出口是返回值：return 
+                    把函数运行的结果或者函数体中得部分信息。拿到函数外部去使用
+                        如果函数没有return返回结果 return; 什么也没有返回 函数在外面执行后赋值给一个变量。这个执行的结果都是undefined
+                            扩展：return还有一个作用
+                                    类似于循环中得break：能够制结束当前函数体中的代码执行 return后的代码不执行
+             -->
+</body>
+<script>
+    function fn(n,m) { 
+      let total=null; //空对象。不占内存地址。比0（在栈内存中会占一个位置） 性能抢上一点
+      total =n+m;
+      return total  //并不是返回total这个变量、返回的是这个变量存储的值。return返回的永远是一个值
+     }
+    //  fn  -->函数本身
+fn(10,20);//代表的函数执行（不仅如此，它代表的是函数执行后。返回的结果。return返回的值）
+// console.log(total)//-->这样会报错。total是函数里面的定义的。他是函数的私有变量（闭包）。在全局中则是未定义的
+// 如何在外面获得函数内部的私有变量：函数的出口 返回值 return
+let result = fn(1,2);//-->fn() 返回的是return的值。在赋值给result
+console.log(result)
+</script>
+</html>

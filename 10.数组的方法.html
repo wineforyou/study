@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    数组中得每一项可以是任何数据类型：内容是数字的那种->一维数组、  内容是对象和这个对象里面又有数组的称为多维数组
+    <!-- 
+        数组中得常用方法
+        -----改变原数组
+            push():            末尾增加一个或者多个数组。                 返回新数组的长度， 改变元原数组
+            pop():             删除末尾的一个元素。                       返回被删除元素，  改变元原数组
+            unshift():         开头增加一个或者多个数组。                  返回新数组的长度。 改变原数组；
+            shift():           删除开头一个元素，                         返回被删除元素。    改变原数组；
+            splice()   有很多功能都可以通过此添加
+              删除：splice(n,m) :从索引n开始删除m个，m不填或大于最大长度时删除到末尾  返回被删除的元素     改变原数组
+                                引申：清空数组：从索引为0开始。删除个数为arr.length
+
+              新增: splice(n,0,...): 从n开始删除0项。并将后面的插入内容存放到n的前面  返回被删除的：  改变原数组
+                                引申： arr.splice(0,0,6); 从索引为0开始删除0个。并在其之前增加一个元素6 这里返回的就是空数组因为没有删除
+            
+              修改 : splice(n,m,...): 把原有内容删除掉。并用新的替换。和上面的原理一样
+
+        -----改变原数组
+            reverse() ：将数组倒序。返回倒序后的结果。改变原数组
+            sort() ：给数组排序 。参数：无/函数  返回排序后的新数组。 原有数组改变
+                        不传递参数-》只能处理10以内，不包含10。他是按照Unicode编码
+                        传递参数为函数 function(a,b){return a-b}   升序
+                                      function(a,b){return b-a}   降序
+
+                    arr.sort(function(a,b){
+                            return a-b
+                        })
+                        )
+
+        -----不改变原数组
+            slice() ： 查找数组。原数组不会改变
+                slice(n,m) : 从索引n开始查找。找到索引为m,不包含m的这个索引 返回一个新数组，内容是查找到的结果 
+                        m不写时，查找到末尾
+                    引申：（浅克隆）克隆数组:  slice(0,arr.length)  这里写length是因为数组最后一项的索引是length-1、
+                                    而slice的第二个参数是不包含的
+                                    克隆后堆内存是不一样的
+                            负数的话就是从尾开始，一样的不包含第二个参数为索引的值。也是前一项 
+            concat() : 拼接数组（值）：参数可以是数组或者值。返回值拼接后的新数组。   原数组不变 
+                    let arr = [1,2];
+                    let arr1 =[3,4]
+                    let arr2 = arr.concat(arr1) :-> [1,2,3,4] ;
+                    let arr3 =arr1.concat(arr) :->[3,4,1,2];
+                    拼接时，谁在concat前  那么拼接后的数组的前面就是该数组：顺序可以自己调的，后面的参数自己调整位置
+                    也可以用空数组来拼接调整位置
+                    let arr4 = [].concat(arr,arr1)
+            
+            join():将数组转换成字符串,参数将会是连接符。 返回字符串 原数组不变
+                    不写参数时就和写，一样了  用，拆分每项并返回成一个字符串
+                    写空串时，没有连接符。字符串就是每项的拼接
+                    扩展点：eval(arr.join('+')) -> 得到数组每项累加的和
+            indexOf / lastIndexOf 不兼容IE9以下
+             返回当前项在数组中第一次 / 最后一次 出现位置的索引。返回索引值。参数是要检测的值。原数组不变。
+                        如果要检测的值在数组中是没有的。那么返回的索引为-1
+                        引申：可以检测数组是否有这个值
+                        if(arr.indexOf(检查的值)>-1){} -> 证明有这个值
+
+
+    ====数组去重
+              1:双重for循环       依次拿出每一项和，和后面的每一项比较。   
+               for(let i = 0;i<arr.length;i++){
+                    let item =arr[i];
+                        for (let k = i+1 ; k < arr.length; k++) {
+                            if(item === arr[k]){
+                                arr.splice(k,1)    
+                                k--;  
+                            }        
+                              
+                        }
+                }
+                2:更好的方法：
+                    基于对象的属性名不能重复来实现高性能的数组去重
+                    1:创建一个空对象 let obj ={};
+                        知识点：   检查对象时候有这个属性名  ->  obj.属性名=undefined 
+
+                    2:依次遍历数组中得每一项。把每一项存储的值当做对象的属性名(数组中得值)和属性值(数组中得值)存储起来 
+                            第一次循环 找到数组中得第一项 1 存储为{1:1}
+                            第2次循环 找到数组中得第2项 2 存储为{1:1,2:2}
+                            第3次循环 找到数组中得第3项 23 存储为{1:1,2:2,23:23}
+                            第4次循环 找到数组中得第4项 23 存储为{1:1,2:2,23:23,23:23}  这里就报错了只能有一个属性名。出现重复。所以重复了
+             
+          ES6:
+          let arr1 =  Array.from(new Set(arr)) -> 把arr去重返回给新数组
+     -->
+</body>
+<script>
+   let arr =[1,2,23,23,33,3,33,4,4,5,11,11];
+   
+   let  obj = {};
+    for (let index = 0; index < arr.length; index++) {
+        const element = arr[index];
+        if(obj[element] !== undefined ){
+            // 检查对象时候有这个属性名 :obj.属性名=undefined 表明没有。则可以加入。说明该值在数组中没有重复。上面的不等于就表示重复
+           //  数组长的话性能不好，删除后索引都需要重新计算
+           // arr.splice(index,1);
+           // index--; 
+            
+            // 遇到重复的，把重复的换成最后一项。在删除最后一项。依次循环
+            arr[index]=arr[arr.length-1];
+            //arr.pop();//这是我想的、。
+            arr.length--;//一样的道理。数组长度减少了那么最后一项也删除了
+            index--;
+            continue;
+        }        
+        obj[element] =element;
+    } 
+   
+   //let arr1 = arr.splice(0,0,6);
+   //let arr2 = arr.slice(0,arr.length)
+//    console.log(arr)
+//    console.log(arr1)
+   //console.log(arr2)
+  // let a  = eval(arr.join('+'));
+  // console.log(a) //-> 15
+  // console.log(arr.sort(function(a,b){return a-b}))
+ /*   for(let i = 0;i<arr.length;i++){
+        let item =arr[i];
+            for (let k = i+1 ; k < arr.length; k++) {
+                if(item === arr[k]){
+                    arr.splice(k,1);
+                    k--;    
+                }        
+            }
+   } */
+   console.log(arr)
+   let arr1 =  Array.from(new Set(arr))
+   console.log(arr1)
+
+</script>
+</html>
+<script>
+// 需求 删除数组最后一项有几种办法
+// arr.splice(arr.length-1,1) arr.pop()   splice的第二个参数可以省去、因为不写就是删除到末尾
+//  末尾增加 arr.push()  arr.splice(arr.length,0,6) 
+//  arr[arr.length] =100 ,这样也可以额 arr.length-1永远是数组的最后一项 。因此重新添加一个就是arr[arr.length] =100
+
+</script>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    循环：按照一定的规律重复去做某件事
+    push(8,9):末尾增加一个或多个,返回新数组长度
+    pop()  删除末尾一个 并返回删除的这个元素
+    shift()  开头增加一个多或多、。返回新数组长度
+    unshift()  删除开头的一个、并返回删除的这个元素
+</body>
+    <script>
+        let arr = [1,2,4,3];
+        let arr2;
+        console.log('length:'+arr.length)
+        // 倒着输出：第一项是数组最后一项、  最后一项的索引是length-1   当输出最前一项时  索引是0因此要等于0或者大于-1
+        for(let i = arr.length-1;i>=0;i--){
+            if((arr[i]%2) !== 0){
+                //    console.log(arr[i])
+                 arr2 = arr.slice(i,1);
+                 console.log(arr2)
+            }
+        } 
+      let arry1 =  arr.filter((i)=>{
+            return i%2 !== 0 //需要用retrun返回、且不能是空数组、length!=0 这个方法?
+      })
+     console.log(arry1)
+    </script>
+</html>

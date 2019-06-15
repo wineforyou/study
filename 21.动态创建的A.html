@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        需求：
+     -->
+     <a href="https://www.zhufengpeixun.com/stu?lx=1&name=AA&age=20#teacher" id="link">测试</a>
+    <!--  <script>
+         let a  = document.getElementById('link');
+         let str = link.href;
+         console.log(str);
+         let i1 = str.indexOf('?');
+         let i2 = str.indexOf('#');
+         if(i2 === -1 ){
+             str = str.substr(i1+1)
+         }else{
+           str=str.substring(i1+1,i2)
+         }
+         console.log(str);
+         let arr = str.split('&');
+        //  str.split('&') 根据&号在拆分每个为一个数组
+         console.log(arr);
+         let obj ={}
+         for (let index = 0; index < arr.length; index++) {
+             const element = arr[index];
+             item=element.split('=');
+             //element 是数组里的每一项 lx=1,name=AA,age=20 ，在通过str.split('=') 根据=号在拆分每个为一个数组
+            //  [lx,1] [name,AA] [age,20]
+             let key  = item[0];  // 对象的属性名说每个数组的第一个。属性值是数组的第二个
+             let value =item[1];
+                obj[key]=value // 
+         }
+         console.log(obj)
+     </script> -->
+     <script>
+        //   利用a标签自带的属性serach不自带hash（#这个符号）
+        let a =document.getElementById('link');
+        console.log(a.search)  // 直接就可以获得从?开始到hash（#）之前的
+        function queryURLParameter(str){
+                let link  =document.createElement('a');//a标签自带有hash和search
+                 link.href = str ;
+                 let search = link.search.substr(1);//substr(n,m) 从索引为n开始截取M个 不填m则截取到最后 
+                 let hash = link.hash.substr(1);
+                 let obj ={};
+                 hash?obj.HASH=hash:null;
+                 if(search){
+                     search = search.split("&");
+                     for (let index = 0; index < search.length; index++) {
+                            item=search[index].split('=');
+                            obj[item[0]]=item[1];
+                     }
+                 }
+            return obj
+        }
+        let string ="https://www.zhufengpeixun.com/stu?lx=1&name=AA&age=20#teacher" 
+        console.log(queryURLParameter(string))
+     </script>
+    </body>
+</html>

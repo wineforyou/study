@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    typeof value :   检测value的数据类型
+                    返回值： 字符串。包含对应的数据类型  比如 'number'  "string" "object" "boolean" "undefined"  "function"
+                        注意                                            null返回的是object  NaN 返回number：他是特殊的数字
+                                                                        null代表的是空对象指针。没有指向任何内存空间和地址
+                            typeof 检测数组/正则/对象 返回都是"object"
+            //无实际意思typeof typeof value :永远返回的是string  第一次typeof返回的都是字符串、第二次 tyoeof 字符串 返回的都是string
+    原型 instanceof 对象  ：检测对象的原型链
+    constructor 
+    Object.prototype.toString.call()
+</body>
+</html>
+<script>
+    n=11
+ console.log( n>10?n++:n--);
+ console.log(n)
+ //n++ 这个表达式的值是增加前的值
+//  ++n  表达式的值是增加后的值
+    // 三元运算符如果某一部分不需要处理、。可以用null /undefined /void 0
+    //    n<10?代码:null
+    // 如果条件成立要执行多项任务
+    //  n>10?(语句,语句):(语句,语句)
+
+    // 有一个知识点   if的一般是  '10' == 10  这种会先转为数字给你比较  但是  switch中得是 ===  比较的是值和类型
+    /*          
+            let n = '10'
+            switch (n) {
+                case 10 :
+                    n++;
+                  break;
+                default:
+                  语句
+            }
+     */ 
+</script>

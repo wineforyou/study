@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        字符串也有索引和length
+        let str = 'wangjing';
+        str[0]='w';
+        str[111111]=undefined;没有的也是返回undefined
+        循环字符串也是可以的
+
+        字符串的常用方法：   肯定不会改变原有字符串。字符串是基本数据类型，都是对值进行操作。而不是和数组一样对空间地址操作。
+            charAt(索引)/ charCodeAt(索引) :  根据索引获取指定位置的字符串 / 字符的unicode编码  参数是索引。返回值是对应字符/编码
+                                参数中所填的索引没有的话就是一个空字符串"",
+            
+            indexOf('字符') / lastIndexOf('字符')   当前字符在字符串中第一次 / 最后一次出现的索引 ，没有则返回-1。因此可以用来检测是否有这个字符
+                    if(str.indeOf('字符') > -1):->有该字符
+
+            slice(n,m): 从索引n开始查找。找到m为止。但是不包含m ,把找到的字符当做新字符串返回。不填m时。表示从n开始找到末尾
+                        克隆字符串：不填或者n为0 
+                        参数为负数：从结尾开始找  
+                        数组的slice也是一样。 第二个参数是索引。查找到第二个参数的索引之前的一个为止。不会改变原来的
+            
+            substring(n,m) 和slice语法一模一样  唯一区别在于：slice支持负数索引。substring不支持
+            substr(n,m) 从索引n开始 截取M个！！这里是多少个，不是索引为M   第一个参数支持负数。第二个参数获取到最后
+                这个和数组的splice 一样 第二个参数是多少个
+            toUpperCase()  /  toLowerCase()  -> 字母大 / 小写转换
+
+            split(分隔符) -->  将字符串用指定的分隔符分割并拼接成一个数组
+            replace(旧内容/正则,新内容)  替换字符串的缘由字符  返回替换后的字符串  不适用正则的情况下。没执行一次只能替换一个
+     -->
+</body>
+</html>
+<script>
+  let str ="wangjing";
+  console.log(str.charAt(100));
+  if(str.indexOf('z') > -1 ){
+      console.log('有')
+  }else{
+      console.log('没有')
+  };
+ let str1= str.slice(1);
+ console.log(str1)
+ str= str.replace('w','A');// 不改变原字符串 所以需要手动重新赋值
+ console.log(str)
+
+/*   for (let index = 0; index < str.length; index++) {
+      const element = str[index];
+      console.log(element)
+  } */
+
+</script>

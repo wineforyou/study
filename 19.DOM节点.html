@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        节点： node
+            在html文档中出现的所有东西都是节点
+                - 元素节点 :html标签
+                - 文本节点 : 文字内容
+                - 注释节点 : 注释内容
+                - 文档节点 : document
+
+            每一个类型的节点都会有一些属性区分自己的特性和特征：
+                nodeType ： 节点类型
+                nodeName ： 节点名称
+                nodeValue ： 节点值
+
+                元素节点：
+                    nodeType ： 1
+                    nodeName ： 大写的标签名 ：DIV
+                    nodeValue ： null
+                文本节点：
+                    nodeType ： 3
+                    nodeName ： '#text'
+                    nodeValue ： 文本内容
+                注释节点：
+                    nodeType ： 8
+                    nodeName ： '#comment'
+                    nodeValue ： 注释内容
+                注释节点：
+                    nodeType ： 3
+                    nodeName ： '#text'
+                    nodeValue ： 文本内容
+                文档节点：
+                    nodeType ： 9
+                    nodeName ： '#document'
+                    nodeValue ： null
+
+        描写节点之间关系的属性
+            parentNode                  获取当前节点的唯一的父节点             只有一个
+            childNodes                  获取当前元素的所有子节点（儿子级别的）  集合  ：包含元素节点文本节点等
+            children                    获取当前元素的所有元素子节点           集合   ：只有元素  但是在IE6-8中会吧注释节点也算进去，兼容不好
+            previousSibling             获取当前节点的上一个哥哥节点           可能是文本可能使文本
+            previousElementSilbing      获取当前节点的上一个哥哥元素节点  不兼容IE8及以下
+            nextSibling                 获取当前节点的下一个弟弟节点           可能是文本可能使文本
+            nextElementSibling          获取当前节点的下一个弟弟元素节点  不兼容IE8及以下
+            fristChild                  获取当前元素的第一个子节点   
+            fristElementChild           获取当前元素的第一个子元素节点  
+            lastChild                   获取当前元素的最后一个子节点   
+            lastElementChild            获取当前元素的最后一个子元素节点  
+
+
+            
+                
+     -->
+     <!-- 
+         需求：兼容处理：获得所有元素节点
+            children 不兼容IE（IE低版本会把注释也当做元素节点）
+     -->
+     <ul id="u1">
+         <li>12</li>
+         <li>34</li>
+         <li>56</li>
+     </ul>
+     <script>
+        /*
+             queryAllChildeNode  ：兼容处理获得指定元素的所有直接点
+             parameter: 
+                node : 当前要操作的元素  [object]
+             return ：所有的元素子节点   [Array]
+             by :  who on 时间 
+             updata   who  on  XX  （修改的内容）
+         */ 
+
+         function queryAllChildeNode(node){
+            let allList  =node.getElementsByTagName('*');
+            let allChildren = [];
+            for (let index = 0; index < allList.length; index++) {
+                const item = allList[index];
+                if(item.nodeType === 1){
+                    // 元素节点的nodeType是1
+                    allChildren.push(item)
+                }
+            }
+            return allChildren
+         }
+        //  测试：
+        let u1 =document.getElementById('u1');
+        let chlidren = queryAllChildeNode(u1);
+        console.log(chlidren)
+         function prev(id) {
+             let prev = id.previousSibling;
+             while(prev && prev.nodeType ===1 ){
+                 prev =prev.previousSibling;
+             }
+             return prev ;
+         }
+     </script>
+</body>
+</html>

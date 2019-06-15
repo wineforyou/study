@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        转Number
+            1:发生的情况
+                isNaN() 当检测的值是不是数字类型，浏览器会自己调用Number()方法把他转换为数字。在检测是否为有效数字 是返回false不是返回true
+                    Number() 遇到有非数字的时候转换为NaN    
+
+                基于parseInt和parseFloat 去手动转换。遇到第一位是数字开头。后面为非数字的。截取到非数字前一位 比如2px -> 2
+                    '3px'-1 -> NaN  '3px'转为数字是NaN NaN和任何值做运算都是NaN
+               
+                数学运算（+ - * / %）  注意+ 不仅仅是数学运算。可能使字符串拼接
+                    let i = '3';
+                    i=i+1 -> '31';
+                    i+=1 -> '31';
+                    i++ ->  4 => i++就是单纯的数学运算。不算字符串拼接
+
+                在 ==  进行比较的时候，有时候也会把其他值转换为数字类型。注意是有时候
+
+            2：转换规律
+                 - 字符串转数字：
+                     默认基本是Number()方法    ：遇到非有效数字 都是NaN;
+                     空字符串为 0 ；空格也是0
+                     '\n'  : 换行 符也是0
+                     '\t'  制表符 也是0
+                     parseInt和parseFloat 都是自己手动
+                 - 布尔转数字：
+                    true -> 1
+                    flase -> 0
+                 -  null转数字：
+                     null -> 0      
+                 -  undefined -> NaN 
+                 -  引用类型值：
+                        都先用toString()转换为字符串  在转Number()
+     -->
+        <!--  转字符串
+            1:发生的情况
+                -基于alert/confirm/promp/document.write 等方法输出内容时。先转字符串在输出
+                -基于字符串拼接 + 的时候
+                -把引用值转换为数字时。先转为字符串在转为数字
+                -给对象设置属性名。如不是字符串。先转为字符串。在当做属性存储（对象的属性名只能是数字或者字符串）
+                -手动条用toString/toFixed/join/String等方法
+            2：转换规律
+                - 默认转换都是toString() 
+                - 除了对象。都是你理解的结果 "要转换的值"
+                -空数组-> '' 空串
+                -[12]  -> '12'
+                -[12,32] -> '12,32'
+
+                对象：都转为"object object"
+                {name:'xx'} -> "object object"
+         -->
+         <!-- 
+            转boolean
+             " " null 0 undefiend NaN  都是false 除了的都是true
+
+          -->
+
+          <!-- 
+                特殊：数学运算和字符串拼接+
+                 当表达式出现字符串时。就属于拼接字符串
+                    1+true -> 2 
+                    "1"+true -> "1true"
+                    [12]+10 ->"1210" :引用类型转换为数字：会先转换为字符串 所以[12] -> 字符串"12"  字符串拼接 "1210"
+                    ({})+10 -> "[object object]10"  对象转数字是先转为字符串[object object] 在拼接[object object]10
+                    {}+10 -》 10   这个和以上说的没有关系，因为他根本就不是数学运算，也不是字符串拼接 他是两部分代码
+                            {} 代表一个代码块
+                            +10才是我们操作的 想大于0+10
+                            严格写法：{}; +10;
+
+           -->
+           <!-- 
+             思考题
+             1:前面的时候是转数字。undefined是NaN 到了[]时 先转为字符串''这个时候就是字符串拼接了 "NaN"
+                所以在字符串“zfpx”之前的加法都是NaN NaN于任何值做运算都是NaN
+             2：后面开始就是字符串拼接
+             12+true+false+null+undefined+[]+'zfpx'+null+undefined+[]+true
+             12+1+0+0+NaN+""+"zfpx"+"null"+"undefined"+""+"true"
+              ---> " NaNzfpxnullundefinedtrue"
+            -->
+
+            <!-- 
+                == 进行比较时，两边数据类型不一样。则先转换为相同类型在比较。
+                    1 ： 对象和对象比：不一定相等。对象操作的是堆内存地址。地址不相同则不想等
+                        {name:'aa'}=={name:'aa'} -> false 两个不同对象。内存地址不一样
+                        let obj ={}; let obj2 =obj ; obj==obj2 -> true 指向了同一个内存地址
+
+                    2：对象和数字：把对象转换为数字在比较
+
+                    3：对象==布尔：把对象和布尔都转为数字在比较
+
+                    4：对象==字符串：把对象和数字转换为数字再比较
+
+                    5：字符串==数字
+
+                    6：字符串==布尔
+
+                    7：布尔==数字  都是转为数字在比较
+             -->
+</body>
+</html>
+
+<!-- 注意点：1 ：不同类型比较都转为数字。 2：有表达式先算出表达式在去看后面比较的是不是同类型
+    [] == false   转为数字 [] -> 0  ;false -> 0  0==0  返回true
+    [] == true     转为数字 [] -> 0  ;false -> 0  1==0  返回false
+    ![] == false   这里注意先算![]-> 转为布尔 ：false  这里是运算符、所以没有下面的直接就是取反。true去反为false  false==false 
+         转boolean
+             " " null 0 undefiend NaN  都是false 除了的都是true 
+
+ -->
+

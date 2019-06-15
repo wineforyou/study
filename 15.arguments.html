@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        arguments:函数内置的实参集合（内置：函数天生就存在的机制。不管你是否设置了形参。也不管你是否传递了实参，arguments都有） 
+                  arguments只能在函数体中使用；
+                  arguments是一个类数组，（和getElementsByTagName得到的一样是类数组）不能使用数组的方法
+                  即使设置形参。形参该是什么值还是什么值。但是arguments存储的还是所有传递过来的实参，所以被称为是实参集合   
+                  arguments的callee属性（arguments.callee）：代表的是当前函数本身
+
+
+     -->
+     <!-- 
+         需求：任意数求和-> 不管输入多少实参都能求和
+      -->
+</body>
+<script>
+/*   function sum(){
+    //   console.log(arguments)
+    var total = null;
+    for (let i= 0; i < arguments.length; i++) {
+        let item = arguments[i];
+        total += item;
+    }
+    return total;
+  } */
+// 升级版：吧字符串累加为数字 对非有效数字不再相加
+  function sum(){
+    let total = null;
+    for (let i= 0; i < arguments.length; i++) {
+        let item = arguments[i];
+        item =Number(item);//先转换为数字。在判断是不是有效数字。如果是就执行。不是则跳过。
+                            // 注意isNaN检测是不是有效数字。是有效数字返回false不是则返回true
+        if(isNaN(item) == false){
+            total += item;
+        }else{
+            continue;
+        }
+        // isNaN(item)?null:total+=item;//更简单
+    }
+    return total;
+  }
+//   es6写法
+let sum2 =(...arg)=>{
+    arg = arg.filter(item=>!isNaN(item));//先筛选出有效数字
+    return eval(arg.join('+'));//在根据eval(XX.join('+'))
+}
+// 在简化
+let sum3 =(...arg)=>eval(arg.filter(item=>!isNaN(item)).join('+'));//在根据eval(XX.join('+'))
+// 只有一个return直接不要{}
+  console.log(sum(1,'1','AAA'));
+  console.log(sum2(1,'1','AAA'));
+  console.log(sum3(1,'1','AAA'));
+</script>
+</html>
+<!--  -->

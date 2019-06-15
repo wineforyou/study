@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            list-style: none
+        }
+        .u1{
+            width: 290px;
+            margin: 50px auto;
+        }
+        .u1 li{
+            border-bottom: 1px solid red;
+            cursor: pointer; /* 鼠标变成手指*/
+            /* 下面三个要一起才能使文本超出宽度的变成... */
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap
+        }
+        .u1 li:nth-of-type(even){
+             /* even：偶数行 add：基数行 */
+
+            /* nth-child(n):当前元素中得所有子元素 */
+            /* nth-of-type(n):先根据前面的标签进行分组。在获取分组中得第几个。
+            比如前面是li那么后面就是li开始学。而不是ul下的所有的子元素（可能有别的标签，这个最稳定） 
+            */
+           
+                background-color: lightseagreen
+            /* 要实现三行变色：
+            nth-child(3n+1){color：red}
+            nth-child(3n+2){color：red}
+            nth-child(3n){color：red}
+            */
+        }
+        .add{
+            color:cornflowerblue;
+            /* background-color: lightcoral */
+        }
+    </style>
+</head>
+<body>
+    <ul class="u1" id='ul'>
+        <li>文本文本文本文本文本文本文本文本文本文本文本文本</li>
+        <li>文本文本文本文本文本文本文本</li>
+        <li>文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本</li>
+        <li>文本文本文本文本文本文本文本</li>
+        <li>文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本</li>
+        <li>文本文本文本文本文本</li>
+        <li>文本文本文本文本文本</li>
+        <li>文本文本文本文本文本</li>
+        <li>文本文本文本文本文本</li>
+    </ul>
+</body>
+</html>
+<!-- 通过js改变 -->
+<script>
+    let u = document.getElementById('ul');
+    let fristLi=ul.children[0];
+    fristLi.className += ' add';
+    // 这里有两个注意点。1：给元素加class是 calssName  2： 后面加的其实就是一个拼串。但是注意 要有一个+= 和最重要的空格' className'
+
+    //   用JS给奇数行换色
+    let liS =u.getElementsByTagName('li');
+    console.log(liS.length)
+    for(let i =0 ;i<liS.length;i++){
+      if(i % 2 === 0){
+          liS[i].style.backgroundColor = "lightcoral"
+      }
+    }
+</script>

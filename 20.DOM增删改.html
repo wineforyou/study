@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        document.createElement('p')  :  创建标签
+
+        [container].appendChild(new)   ：向父级末尾添加一个元素
+
+        [container].insertBefore(new,old) : 在指定容器的old节点之前插入新的内容new 如果第二个参数没有。则默认为末尾
+
+        cloneNode : 把某一个节点克隆
+            语法：  节点.cloneNode            浅克隆 ：只克隆当前标签
+                    节点.cloneNode(true)      深克隆 :  克隆标签和内容
+        [container].removChilde(子节点) ：删除指定容器内的指定节点。 其实也就是之前李立超讲的通过父节点删除子节点
+
+        set/get/removeAttribute  :  设置/获得/移除当前元素的自定义属性
+
+     -->
+     <div id="box">
+            自定义属性
+     </div>
+     <script>
+         let box =document.getElementById('box');
+        //  这两个说独立的、不能互相设置和获取  通过什么设置就只能用什么去获取或者删除
+        //  自定义属性-->  把当前元素作为一个对象。在当前对象对应的堆内存中新增一个自定义属性
+        //   在开发中用的多。
+                    box.myIndex = 10;
+                    console.log(box['myIndex']) //box.myIndex
+                    delete box.myIndex  //真删除
+                    box.myIndex  =null  //假删除
+        //           -->   基于attribute 来设置自定义属性
+                box.setAttribute('myColor','red'); // 设置
+               /*  box.getAttribute('myColor');// 获取
+                box.removeAttribute('myColor');// 删除 */
+                // 通过setAttribute设置的自定义属性值都是字符串  会在结构中直接体现，操作dom 耗性能  不多用
+     </script>
+</body>
+</html>

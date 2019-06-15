@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        普通对象：
+         -： {}
+         -： 0到多组属性名和属性值的键值对组成 
+         -： 对象的操作： 对键值对的增删改查
+         
+         属性名可能使字符串和数字、遇到费字符串和数字时。会先把它转换成字符串，用toString()方法
+     -->
+     <script>
+         let obj ={
+             name:'wj',
+             age:25
+         }
+        /*
+            获取： 对象.属性名  对象['属性名']  
+                     注意：这里如果不是放入字符串'属性名' 那么会解毒为一个变量、
+                            回去找这个变量对应的值。然后在去看obj里有没有这个值得属性名
+                obj['name']   obj.name 
+
+            增和改：对象.属性名=属性值   js对象中属性名是不允许重复的。是唯一的。
+                                        原来有就是改。 没有就是增加
+            删除 
+                彻底删除： delete 对象.属性名   ：对象中不存在这个属性
+                假删除：  对象.属性名 = null    ：并没有移除属性。只是让当前属性的值为空
+         */
+         let a =obj['name'];//一般对象的属性名都是字符串格式
+         obj['name']='';
+         let name = 'abc';
+         console.log(obj[name]); //这里的name就是一个变量了。name的值是abc 所以代表的就是obj.abc, obj里没有abc这个值 返回undefined
+         console.log(obj)
+       
+     </script>
+</body>
+</html>

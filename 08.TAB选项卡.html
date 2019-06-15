@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0
+        }
+       .tabBox{
+           margin: 20px auto;
+           width: 500px;
+       }
+       .tabBox ul {
+            position: relative;
+            top: 1px;
+            /* 这里是为了让ul和div的边框重合。relative:相对于自己之前的位置移动 */
+       }
+       .tabBox ul li {
+           cursor: pointer;
+           list-style: none;
+           display: inline-block;
+           height: 50px;
+           line-height: 50px;
+           border: 1px solid black;
+           padding: 0 15px;
+       }
+       .tabBox ul li.active{
+           /* 让下边框变为白色（和背景颜色一样）。看起来就没有边框 */
+           border-bottom-color: #ffffff;
+           color: lightcoral;
+           font-weight: bold
+       }
+       .tabBox div{
+           width: 500px;
+           height: 280px;
+           border: 1px solid black;
+           display: none
+       }
+       .tabBox div.active{
+           display: block;
+           /* tabbox下 div中含有.active的 */
+       }
+    </style>
+</head>
+<body>
+    <div class="tabBox" id="tabBox">
+        <ul>
+            <li class="active">选项卡1</li>
+            <li>选项卡2</li>
+            <li>选项卡3</li>
+        </ul>
+        <div class="active">选项卡1的内容</div>
+        <div>选项卡2的内容</div>
+        <div>选项卡3的内容</div>
+   </div>
+   <script>
+     let tabBox = document.getElementById('tabBox');
+     let li =tabBox.getElementsByTagName('li');
+     let div =tabBox.getElementsByTagName('div');
+    for(let i =0;i<li.length;i++){
+        li[i].onclick=function(){
+            // console.log(i)
+            /*
+             每次都是3的原因：   先绑定函数。函数的运行机制 ：先开辟一个堆内存。存放函数里的内容。用字符串的形式。
+                                                        然后把这个堆内存的内存地址赋值给函数名。
+                                循环时。都是先绑定函数。所有每次tab(i)  这里只是字符串。、函数还没执行
+                                然后点击时，函数才开始把字符串复制过来自上而下执行
+                                    这个时候i已经是最大值都是length 3了。所以 每次点击都是3  
+                                                            索引最大才2
+             */
+            //  解决：自定义属性  this:谁调用就是谁
+            // 自定义属性：每次循环给每个li添加一个属性index 存储的值就是当前的索引
+            /* 
+            li[i].index = i;
+            tab(this.index); 
+            */
+            // 其实上面是用var的结果
+            // 如果用let 直接就可以了
+            tab(i)
+        }
+    };
+
+     function tab(n) {
+         for(let i =0 ;i<li.length;i++){
+            //  循环先让所有的都没有被选中的样式
+             li[i].className='';
+             div[i].className='';
+         };
+        //  哪个被点击哪个就有样式
+         li[n].className=' active';
+         div[n].className=' active';
+     }
+   </script>
+</body>
+</html>

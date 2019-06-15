@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        Math称为数学函数。属于对象类型 typeof 可以检查 --> 'Object'
+            Math常用方法:
+                Math.abs(10) 取绝对值   正负都返回正
+                Math.ceil/floor : 向上或者向下取整   小数点后有就进1/只要整数  
+                Math.round  四舍五入：
+                   sqrt :  开方
+                   pow(n,m) ： 幂   n的m次方
+                   max(n,m)   最大值
+                   min(n,m)   最小值
+                Math.PI    这个是属性         圆周率
+                Math.random() : 获取0-1之间的随机小数
+
+            公式：取n-m之间的随机整数
+            Math.round(Math.random()*(m-n)+n)
+     -->
+</body>
+<script>
+  
+   
+   for(let i =0 ;i<10;i++){
+    let a= Math.round(Math.random()*(10-1)+1);
+        console.log(a)
+   }
+
+</script>
+</html>
